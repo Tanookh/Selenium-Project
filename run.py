@@ -10,4 +10,5 @@ with Website() as bot:
                      check_out_date='2022-03-21')
     bot.select_adults(count=3)
     bot.click_search()
-    bot.apply_filtration(3, 4, 5)
+    bot.apply_filtration(4, 5)
+

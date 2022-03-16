@@ -109,3 +109,5 @@ class Website(webdriver.Chrome):
         filtration = WebsiteFiltration()
         filtration.init_driver(driver=self)
         filtration.apply_star_rating(*star_values)
+        filtration.sort_price_lowest_first()
+

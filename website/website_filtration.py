@@ -18,3 +18,19 @@ class WebsiteFiltration:
                 f'div[data-filters-item="class:class={star_value}"]'
             )
             star_class_element.click()
+
+    def sort_price_lowest_first(self):
+        try:
+            element = self.driver.find_element_by_css_selector(
+                'li[data-id="price"]'
+            )
+            element.click()
+        except:
+            element = self.driver.find_element_by_css_selector(
+                'button[data-testid="sorters-dropdown-trigger"]'
+            )
+            element.click()
+            element = self.driver.find_element_by_css_selector(
+                'button[data-id="price"]'
+            )
+            element.click()
