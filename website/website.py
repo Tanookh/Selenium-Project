@@ -14,7 +14,9 @@ class Website(webdriver.Chrome):
         self.driver_path = driver_path
         self.teardown = teardown
         os.environ['PATH'] += self.driver_path
-        super(Website, self).__init__()
+        options = webdriver.ChromeOptions()
+        options.add_experimental_option('excludeSwitches', ['enable-logging'])
+        super(Website, self).__init__(options=options)
         self.implicitly_wait(5)  # Wait for the element to appear or wait 15 seconds
         self.maximize_window()  # Start with a full screen
 
@@ -121,5 +123,5 @@ class Website(webdriver.Chrome):
         table = PrettyTable(
             field_names=["Hotel Name", "Hotel Price", "Hotel Rating"]
         )
-
-        print(report.pull_deal_box_attributes())
+        table.add_rows(report.pull_deal_box_attributes())
+        print(table)
