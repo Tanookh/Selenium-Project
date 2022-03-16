@@ -1,6 +1,5 @@
 from website.website import Website
 
 
-inst = Website()
-
-inst.land_first_page()
+with Website() as bot:
+    bot.land_first_page()
