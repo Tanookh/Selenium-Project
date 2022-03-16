@@ -2,6 +2,8 @@ import website.constants as const
 import os
 from selenium import webdriver
 from website.website_filtration import WebsiteFiltration
+from website.website_report import WebsiteReport
+from prettytable import PrettyTable
 
 
 # A class and functions for the webpage
@@ -12,11 +14,18 @@ class Website(webdriver.Chrome):
         self.driver_path = driver_path
         self.teardown = teardown
         os.environ['PATH'] += self.driver_path
+<<<<<<< HEAD
         # Ignore the errors on the cmd for development use
         options = webdriver.ChromeOptions()
         options.add_experimental_option('excludeSwitches', ['enable-logging'])
         super(Website, self).__init__(options=options)
         self.implicitly_wait(5)  # Wait for the element to appear or wait 5 seconds
+=======
+        options = webdriver.ChromeOptions()
+        options.add_experimental_option('excludeSwitches', ['enable-logging'])
+        super(Website, self).__init__(options=options)
+        self.implicitly_wait(5)  # Wait for the element to appear or wait 15 seconds
+>>>>>>> updates
         self.maximize_window()  # Start with a full screen
 
     # Choose if to exit the webpage or not after running
@@ -114,3 +123,13 @@ class Website(webdriver.Chrome):
         filtration.apply_star_rating(*star_values)
         filtration.sort_price_lowest_first()
 
+    def report_results(self):
+        hotel_boxes = self.find_element_by_id(
+            'search_results_table'
+        )
+        report = WebsiteReport(hotel_boxes)
+        table = PrettyTable(
+            field_names=["Hotel Name", "Hotel Price", "Hotel Rating"]
+        )
+        table.add_rows(report.pull_deal_box_attributes())
+        print(table)
