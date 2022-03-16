@@ -105,7 +105,7 @@ class Website(webdriver.Chrome):
         )
         search_button.click()
 
-    def apply_filtration(self, star_value):
+    def apply_filtration(self, *star_values):
         filtration = WebsiteFiltration()
         filtration.init_driver(driver=self)
-        filtration.apply_star_rating(star_value)
+        filtration.apply_star_rating(*star_values)

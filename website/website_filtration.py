@@ -12,8 +12,9 @@ class WebsiteFiltration:
     def init_driver(self, driver: WebDriver):
         self.driver = driver
 
-    def apply_star_rating(self, star_value=None):
-        star_class_element = self.driver.find_element_by_css_selector(
-            f'div[data-filters-item="class:class={star_value}"]'
-        )
-        star_class_element.click()
+    def apply_star_rating(self, *star_values):
+        for star_value in star_values:
+            star_class_element = self.driver.find_element_by_css_selector(
+                f'div[data-filters-item="class:class={star_value}"]'
+            )
+            star_class_element.click()
