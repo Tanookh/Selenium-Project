@@ -96,4 +96,9 @@ class Website(webdriver.Chrome):
                 'value'
             )  # Gives the adults count
 
-
+    # Click search function
+    def click_search(self):
+        search_button = self.find_element_by_css_selector(
+            'button[type="submit"]'
+        )
+        search_button.click()
