@@ -1,6 +1,8 @@
 import website.constants as const
 import os
 from selenium import webdriver
+from website.website_filtration import WebsiteFiltration
+
 
 # A class and functions for the webpage
 class Website(webdriver.Chrome):
@@ -11,8 +13,8 @@ class Website(webdriver.Chrome):
         self.teardown = teardown
         os.environ['PATH'] += self.driver_path
         super(Website, self).__init__()
-        self.implicitly_wait(15) # Wait for the element to appear or wait 15 seconds
-        self.maximize_window() # Start with a full screen
+        self.implicitly_wait(5)  # Wait for the element to appear or wait 15 seconds
+        self.maximize_window()  # Start with a full screen
 
     # Choose if to exit the webpage or not after running
     def __exit__(self, exc_type, exc_val, exc_tb):
@@ -96,4 +98,16 @@ class Website(webdriver.Chrome):
                 'value'
             )  # Gives the adults count
 
+    # Click search function
+    def click_search(self):
+        search_button = self.find_element_by_css_selector(
+            'button[type="submit"]'
+        )
+        search_button.click()
+
+    def apply_filtration(self, *star_values):
+        filtration = WebsiteFiltration()
+        filtration.init_driver(driver=self)
+        filtration.apply_star_rating(*star_values)
+        filtration.sort_price_lowest_first()
 
