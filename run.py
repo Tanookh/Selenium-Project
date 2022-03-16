@@ -12,6 +12,9 @@ try:
         bot.select_adults(count=1)
         bot.click_search()
         bot.apply_filtration(4, 5)
+        bot.refresh() # A refresh to let the bot grab the data properly
+        bot.report_results()
+
 except Exception as e:
     if 'in PATH' in str(e):
         print(
