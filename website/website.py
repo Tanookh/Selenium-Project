@@ -13,7 +13,7 @@ class Website(webdriver.Chrome):
         self.teardown = teardown
         os.environ['PATH'] += self.driver_path
         super(Website, self).__init__()
-        self.implicitly_wait(15)  # Wait for the element to appear or wait 15 seconds
+        self.implicitly_wait(5)  # Wait for the element to appear or wait 15 seconds
         self.maximize_window()  # Start with a full screen
 
     # Choose if to exit the webpage or not after running
